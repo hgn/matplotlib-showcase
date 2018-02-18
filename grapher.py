@@ -103,6 +103,7 @@ class BarGraph(Graph):
     def __init__(self, title, **args):
         super().__init__(title, **args)
         self._init_pseudo_data()
+        self.seperator = list()
 
     def _init_pseudo_data(self):
         """ just to have some data if no feeding was done """
@@ -125,6 +126,9 @@ class BarGraph(Graph):
         )
         """
         self.data = data
+
+    def seperator_add(self, position, color):
+        self.seperator.append((position, color))
 
     def generate(self, filepath: str, dpi=300):
         fig = plt.figure(figsize=self.figsize)
@@ -150,8 +154,15 @@ class BarGraph(Graph):
             y_pos.append(i)
             colors.append(color)
 
-        barcall(y_pos, x_pos, align='center', color=colors, alpha=0.5)
+        barcall(y_pos, x_pos, align='center', color=colors, alpha=1.0)
         ticks_call(y_pos, labels, rotation=0)
+
+        for seperator in self.seperator:
+            pos, color = seperator
+            if self.horizontal:
+                plt.axvline(x=pos, linewidth=1, color=color, linestyle='dotted', alpha=.5)
+            else:
+                plt.axhline(y=pos, linewidth=1, color=color, linestyle='dotted', alpha=.5)
 
         # formating stuff
         ax.grid(False)
@@ -177,6 +188,7 @@ if __name__ == "__main__":
     title, filename = 'Bar Plot', 'bar.png'
     print('generate \'{}\' in \'{}\''.format(title, filename))
     graph = BarGraph(title, ylabel='ylabel', horizontal=True, style='xkcd')
+    graph.seperator_add(56, 'black')
     graph.generate(filename)
 
 # if len(sys.argv) > 1:
