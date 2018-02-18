@@ -151,7 +151,7 @@ class BarGraph(Graph):
             colors.append(color)
 
         barcall(y_pos, x_pos, align='center', color=colors, alpha=0.5)
-        ticks_call(y_pos, labels)
+        ticks_call(y_pos, labels, rotation=0)
 
         # formating stuff
         ax.grid(False)
