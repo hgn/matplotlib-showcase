@@ -6,6 +6,7 @@ Following link list may be useful to improve/extend these thin wrapper:
 ## Mixed
 
 - http://www.randalolson.com/2014/06/28/how-to-make-beautiful-data-visualizations-in-python-with-matplotlib/
+- https://towardsdatascience.com/simple-ways-to-improve-your-matplotlib-b64eebccfd5
 
 ## Layout, Grid and the like
 
